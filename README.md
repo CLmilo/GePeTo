@@ -1,1 +1,1 @@
-# GePeTo_bot
+# GePeTo
