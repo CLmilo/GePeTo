@@ -1,0 +1,4 @@
+# prompts para generar que chatgpt te genere un comando para abrir whatsapp en windows
+
+lista:
+# idea descartada

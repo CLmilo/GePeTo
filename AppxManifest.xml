@@ -1,0 +1,311 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" xmlns:uap2="http://schemas.microsoft.com/appx/manifest/uap/windows10/2" xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3" xmlns:desktop="http://schemas.microsoft.com/appx/manifest/desktop/windows10" xmlns:desktop2="http://schemas.microsoft.com/appx/manifest/desktop/windows10/2" xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities" xmlns:rescap3="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities/3" xmlns:com="http://schemas.microsoft.com/appx/manifest/com/windows10" IgnorableNamespaces="desktop2 rescap3" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
+  <!--
+    The 'desktop2' and 'rescap3' namespaces are marked as ignorable above,
+    since they are only available with the Windows 10 "Creators Update",
+    but we want to be able to target the Windows 10 "Anniversary Update".
+  -->
+  <Identity Name="SpotifyAB.SpotifyMusic" Version="1.209.743.0" ProcessorArchitecture="x86" Publisher="CN=453637B3-4E12-4CDF-B0D3-2A3C863BF6EF" />
+  <Properties>
+    <DisplayName>Spotify Music</DisplayName>
+    <PublisherDisplayName>Spotify AB</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.png</Logo>
+  </Properties>
+  <Resources>
+    <!-- Default language specified first-->
+    <Resource Language="en-US" />
+    <Resource Language="af" />
+    <Resource Language="am" />
+    <Resource Language="ar" />
+    <Resource Language="az-latn" />
+    <Resource Language="bg" />
+    <!--Resource Language="bho" /-->
+    <Resource Language="bn" />
+    <Resource Language="ca" />
+    <Resource Language="cs" />
+    <Resource Language="da" />
+    <Resource Language="de" />
+    <Resource Language="el" />
+    <Resource Language="es" />
+    <Resource Language="es-419" />
+    <Resource Language="et" />
+    <Resource Language="fa" />
+    <Resource Language="fi" />
+    <Resource Language="fil" />
+    <Resource Language="fr" />
+    <Resource Language="fr-CA" />
+    <Resource Language="gu" />
+    <Resource Language="he" />
+    <Resource Language="hi" />
+    <Resource Language="hr" />
+    <Resource Language="hu" />
+    <Resource Language="id" />
+    <Resource Language="is" />
+    <Resource Language="it" />
+    <Resource Language="ja" />
+    <Resource Language="kn" />
+    <Resource Language="lt" />
+    <Resource Language="lv" />
+    <Resource Language="ml" />
+    <Resource Language="mr" />
+    <Resource Language="ms" />
+    <Resource Language="nb" />
+    <Resource Language="ne" />
+    <Resource Language="nl" />
+    <Resource Language="or" />
+    <Resource Language="pa-IN" />
+    <Resource Language="pa-PK" />
+    <Resource Language="pl" />
+    <Resource Language="pt-BR" />
+    <Resource Language="pt-PT" />
+    <Resource Language="ro" />
+    <Resource Language="sk" />
+    <Resource Language="sl" />
+    <Resource Language="sr-Latn" />
+    <Resource Language="sv" />
+    <Resource Language="sw" />
+    <Resource Language="ta" />
+    <Resource Language="te" />
+    <Resource Language="th" />
+    <Resource Language="tr" />
+    <Resource Language="uk" />
+    <Resource Language="ur" />
+    <Resource Language="vi" />
+    <Resource Language="zh-CN" />
+    <Resource Language="zh-Hant" />
+    <Resource Language="zh-TW" />
+    <Resource Language="zu" />
+    <Resource uap:Scale="100" />
+    <Resource uap:Scale="125" />
+    <Resource uap:Scale="150" />
+    <Resource uap:Scale="200" />
+    <Resource uap:Scale="400" />
+  </Resources>
+  <Dependencies>
+    <!-- See: https://docs.microsoft.com/en-us/windows/uwp/porting/desktop-to-uwp-known-issues#blue-screen-with-error-code-0x139-kernelsecuritycheckfailure -->
+    <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.17763.0" MaxVersionTested="10.0.22621.0" />
+    <!-- Required for the Windows 11 widget. -->
+    <PackageDependency Name="Microsoft.WindowsAppRuntime.1.2" MinVersion="2000.677.1750.0" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />
+    <!-- Required for the Xbox GameBar widget. -->
+    <PackageDependency Name="Microsoft.VCLibs.140.00" MinVersion="14.0.30035.0" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />
+  </Dependencies>
+  <Capabilities>
+    <Capability Name="internetClient" />
+    <rescap:Capability Name="runFullTrust" />
+    <rescap:Capability Name="packageQuery" />
+    <!-- Required for Dashboard Widget-->
+    <!--<rescap:Capability Name="globalMediaControl" />-->
+  </Capabilities>
+  <Extensions>
+    <Extension Category="windows.activatableClass.inProcessServer">
+      <InProcessServer>
+        <Path>RuntimeComponent.dll</Path>
+        <ActivatableClass ActivatableClassId="RuntimeComponent.LiveTileUpdateTask" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="RuntimeComponent.UpdateTask" ThreadingModel="both" />
+        <!-- The `AppServiceTask` provides Desktop Partner API functionality. -->
+        <ActivatableClass ActivatableClassId="RuntimeComponent.AppServiceTask" ThreadingModel="both" />
+      </InProcessServer>
+    </Extension>
+    <!-- The following extensions provide Xbox GameBar widget functionality. -->
+    <Extension Category="windows.activatableClass.inProcessServer">
+      <InProcessServer>
+        <Path>Microsoft.Gaming.XboxGameBar.dll</Path>
+        <ActivatableClass ActivatableClassId="Microsoft.Gaming.XboxGameBar.Authentication.XboxGameBarWebAuthenticationBroker" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="Microsoft.Gaming.XboxGameBar.Restricted.XboxGameBarForegroundWorker" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="Microsoft.Gaming.XboxGameBar.XboxGameBarWidgetControl" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="Microsoft.Gaming.XboxGameBar.XboxGameBarWidget" ThreadingModel="both" />
+      </InProcessServer>
+    </Extension>
+    <Extension Category="windows.activatableClass.proxyStub">
+      <ProxyStub ClassId="00000355-0000-0000-C000-000000000046">
+        <Path>Microsoft.Gaming.XboxGameBar.winmd</Path>
+        <Interface Name="Microsoft.Gaming.XboxGameBar.Private.IXboxGameBarWidgetAuthHost" InterfaceId="DC263529-B12F-469E-BB35-B94069F5B15A" />
+        <Interface Name="Microsoft.Gaming.XboxGameBar.Private.IXboxGameBarWidgetControlHost" InterfaceId="C309CAC7-8435-4082-8F37-784523747047" />
+        <Interface Name="Microsoft.Gaming.XboxGameBar.Private.IXboxGameBarWidgetForegroundWorkerHost" InterfaceId="DDB52B57-FA83-420C-AFDE-6FA556E18B83" />
+        <Interface Name="Microsoft.Gaming.XboxGameBar.Private.IXboxGameBarWidgetForegroundWorkerPrivate" InterfaceId="42BACDFC-BB28-4E71-99B4-24C034C7B7E0" />
+        <Interface Name="Microsoft.Gaming.XboxGameBar.Private.IXboxGameBarNavigationKeyCombo" InterfaceId="5EEA3DBF-09BB-42A5-B491-CF561E33C172" />
+        <Interface Name="Microsoft.Gaming.XboxGameBar.Private.IXboxGameBarWidgetActivatedEventArgsPrivate" InterfaceId="782535A7-9407-4572-BFCB-316B4086F102" />
+        <Interface Name="Microsoft.Gaming.XboxGameBar.Private.IXboxGameBarWidgetHost" InterfaceId="5D12BC93-212B-4B9F-9091-76B73BF56525" />
+        <Interface Name="Microsoft.Gaming.XboxGameBar.Private.IXboxGameBarWidgetHost2" InterfaceId="28717C8B-D8E8-47A8-AF47-A1D5263BAE9B" />
+        <Interface Name="Microsoft.Gaming.XboxGameBar.Private.IXboxGameBarWidgetHost3" InterfaceId="3F5A3F12-C1E4-4942-B80D-3117BC948E29" />
+        <Interface Name="Microsoft.Gaming.XboxGameBar.Private.IXboxGameBarWidgetHost4" InterfaceId="FA696D9E-2501-4B01-B26F-4BB85344740F" />
+        <Interface Name="Microsoft.Gaming.XboxGameBar.Private.IXboxGameBarWidgetPrivate" InterfaceId="22ABA97F-FB0F-4439-9BDD-2C67B2D5AA8F" />
+        <Interface Name="Microsoft.Gaming.XboxGameBar.Private.IXboxGameBarWidgetPrivate2" InterfaceId="B2F7DB8C-7540-48DA-9B46-4E60CE0D9DEB" />
+        <Interface Name="Microsoft.Gaming.XboxGameBar.Private.IXboxGameBarWidgetPrivate3" InterfaceId="4FB89FB6-7CB8-489D-8408-2269E6C733A1" />
+      </ProxyStub>
+    </Extension>
+    <!-- See: https://docs.microsoft.com/en-us/windows/uwp/porting/desktop-to-uwp-extensions -->
+    <desktop2:Extension Category="windows.firewallRules">
+      <desktop2:FirewallRules Executable="Spotify.exe">
+        <!-- Allow incoming TCP traffic for "Local RPC" and "Loopback Redirect Server" HTTP(S) port ranges. -->
+        <desktop2:Rule Direction="in" IPProtocol="TCP" LocalPortMin="4371" LocalPortMax="4379" Profile="all" />
+        <desktop2:Rule Direction="in" IPProtocol="TCP" LocalPortMin="4381" LocalPortMax="4390" Profile="all" />
+        <desktop2:Rule Direction="in" IPProtocol="TCP" LocalPortMin="8080" LocalPortMax="8082" Profile="all" />
+        <desktop2:Rule Direction="in" IPProtocol="TCP" LocalPortMin="8443" LocalPortMax="8443" Profile="all" />
+        <!-- Allow incoming TCP and UDP traffic on default "Chrome Remote Debugging" port. -->
+        <desktop2:Rule Direction="in" IPProtocol="TCP" LocalPortMin="8088" LocalPortMax="8088" Profile="all" />
+        <desktop2:Rule Direction="in" IPProtocol="UDP" LocalPortMin="8088" LocalPortMax="8088" Profile="all" />
+        <!-- Allow incoming UDP traffic on default "Local File Sync Discovery" port. -->
+        <desktop2:Rule Direction="in" IPProtocol="UDP" LocalPortMin="57621" LocalPortMax="57621" Profile="all" />
+        <!-- Allow incoming TCP traffic on default "Local File Sync" ports. -->
+        <desktop2:Rule Direction="in" IPProtocol="TCP" LocalPortMin="57621" LocalPortMax="57631" Profile="all" />
+        <!-- Allow all outgoing TCP and UDP traffic. -->
+        <desktop2:Rule Direction="out" IPProtocol="TCP" Profile="all" />
+        <desktop2:Rule Direction="out" IPProtocol="UDP" Profile="all" />
+      </desktop2:FirewallRules>
+    </desktop2:Extension>
+  </Extensions>
+  <Applications>
+    <!-- The main entry point is the migrator, which will either start migration or launch the app. -->
+    <Application Id="Spotify" Executable="SpotifyMigrator.exe" EntryPoint="Windows.FullTrustApplication">
+      <!-- The BackgroundColor property needs to match the background of Square44x44Logo.
+           It's used as a mandatory padding around the icon. -->
+      <uap:VisualElements AppListEntry="default" BackgroundColor="#1ed760" Description="Spotify" DisplayName="Spotify" Square44x44Logo="Assets\Square44x44Logo.png" Square150x150Logo="Assets\Square150x150Logo.png">
+        <uap:DefaultTile ShortName="Spotify" Square71x71Logo="Assets\Square71x71Logo.png" Square310x310Logo="Assets\Square310x310Logo.png" Wide310x150Logo="Assets\Wide310x150Logo.png">
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square150x150Logo" />
+            <uap:ShowOn Tile="square310x310Logo" />
+          </uap:ShowNameOnTiles>
+          <uap:TileUpdate Recurrence="halfHour" UriTemplate="https://spclient.wg.spotify.com/v1/live-tile-xml?region={region}&amp;language={language}" />
+        </uap:DefaultTile>
+      </uap:VisualElements>
+      <Extensions>
+        <Extension Category="windows.backgroundTasks" EntryPoint="RuntimeComponent.LiveTileUpdateTask">
+          <BackgroundTasks>
+            <Task Type="timer" />
+          </BackgroundTasks>
+        </Extension>
+        <Extension Category="windows.updateTask" EntryPoint="RuntimeComponent.UpdateTask"></Extension>
+        <!-- The `AppServiceTask` provides Desktop Partner API functionality. -->
+        <uap:Extension Category="windows.appService" EntryPoint="RuntimeComponent.AppServiceTask">
+          <uap3:AppService Name="spotify.partnerApi" SupportsRemoteSystems="true" />
+        </uap:Extension>
+        <uap3:Extension Category="windows.protocol">
+          <uap3:Protocol Name="spotify" Parameters="--protocol-uri=&quot;%1&quot;" />
+        </uap3:Extension>
+        <uap3:Extension Category="windows.appExecutionAlias" Executable="SpotifyMigrator.exe" EntryPoint="Windows.FullTrustApplication">
+          <uap3:AppExecutionAlias>
+            <desktop:ExecutionAlias Alias="Spotify.exe" />
+          </uap3:AppExecutionAlias>
+        </uap3:Extension>
+        <!-- When launched as a startup task, use a launcher, so we can pass the autostart flag. -->
+        <desktop:Extension Category="windows.startupTask" Executable="SpotifyStartupTask.exe" EntryPoint="Windows.FullTrustApplication">
+          <desktop:StartupTask TaskId="Spotify" Enabled="false" DisplayName="Spotify" />
+        </desktop:Extension>
+        <!-- See: https://docs.microsoft.com/en-us/windows/uwp/porting/desktop-to-uwp-extensions -->
+        <rescap3:Extension Category="windows.desktopAppMigration">
+          <rescap3:DesktopAppMigration>
+            <rescap3:DesktopApp ShortcutPath="%USERPROFILE%\Desktop\Spotify.lnk" />
+            <rescap3:DesktopApp ShortcutPath="%APPDATA%\Microsoft\Windows\Start Menu\Programs\Spotify.lnk" />
+            <rescap3:DesktopApp ShortcutPath="%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Spotify.lnk" />
+          </rescap3:DesktopAppMigration>
+        </rescap3:Extension>
+        <!-- The following extensions provide Windows 11 Widget support. -->
+        <com:Extension Category="windows.comServer">
+          <com:ComServer>
+            <com:ExeServer Executable="SpotifyWidgetProvider.exe" DisplayName="SpotifyWidgetProviderApp">
+              <com:Class Id="BB18213E-738B-4B67-A9C4-3FB28699DFF4" DisplayName="SpotifyWidgetProvider" />
+              <com:Class Id="A7A8D79F-1452-4637-BFD3-6DA67ABBDA4B" DisplayName="Toast activator" />
+              <com:Class Id="E83487DE-B958-4F64-85CC-41FD42536F90" DisplayName="Content Update Background Task" />
+            </com:ExeServer>
+          </com:ComServer>
+        </com:Extension>
+        <uap3:Extension Category="windows.appExtension">
+          <uap3:AppExtension Name="com.microsoft.windows.widgets" DisplayName="Spotify" Id="SpotifyWidgetApp" PublicFolder="Public">
+            <uap3:Properties>
+              <WidgetProvider>
+                <ProviderIcons>
+                  <Icon Path="Assets\Square44x44Logo.targetsize-96_altform-unplated.png" />
+                </ProviderIcons>
+                <Activation>
+                  <!-- Apps exports COM interface which implements `IWidgetProvider` -->
+                  <CreateInstance ClassId="BB18213E-738B-4B67-A9C4-3FB28699DFF4" />
+                </Activation>
+                <!-- Something new in the drop from MSFT. What is this for? -->
+                <!-- <TrustedPackageFamilyNames>
+                  <TrustedPackageFamilyName>Microsoft.MicrosoftEdge.Stable_8wekyb3d8bbwe</TrustedPackageFamilyName>
+                </TrustedPackageFamilyNames> -->
+                <Definitions>
+                  <Definition Id="Spotify_Widget" DisplayName="Spotify" Description="Spotify Widget" AllowMultiple="false">
+                    <Capabilities>
+                      <Capability>
+                        <Size Name="small" />
+                      </Capability>
+                      <Capability>
+                        <Size Name="medium" />
+                      </Capability>
+                      <Capability>
+                        <Size Name="large" />
+                      </Capability>
+                    </Capabilities>
+                    <ThemeResources>
+                      <Icons>
+                        <Icon Path="Assets\Square44x44Logo.targetsize-96_altform-unplated.png" />
+                      </Icons>
+                      <Screenshots>
+                        <Screenshot Path="Assets\WidgetScreenshot300x304Light.png" />
+                      </Screenshots>
+                      <DarkMode>
+                        <Icons>
+                          <Icon Path="Assets\Square44x44Logo.targetsize-96_altform-unplated.png" />
+                        </Icons>
+                        <Screenshots>
+                          <Screenshot Path="Assets\WidgetScreenshot300x304Dark.png" />
+                        </Screenshots>
+                      </DarkMode>
+                      <LightMode>
+                        <Icons>
+                          <Icon Path="Assets\Square44x44Logo.targetsize-96_altform-unplated.png" />
+                        </Icons>
+                        <Screenshots>
+                          <Screenshot Path="Assets\WidgetScreenshot300x304Light.png" />
+                        </Screenshots>
+                      </LightMode>
+                    </ThemeResources>
+                  </Definition>
+                </Definitions>
+              </WidgetProvider>
+            </uap3:Properties>
+          </uap3:AppExtension>
+        </uap3:Extension>
+        <!--Specify which CLSID to activate when toast is clicked. -->
+        <desktop:Extension Category="windows.toastNotificationActivation">
+          <desktop:ToastNotificationActivation ToastActivatorCLSID="A7A8D79F-1452-4637-BFD3-6DA67ABBDA4B" />
+        </desktop:Extension>
+      </Extensions>
+    </Application>
+    <!-- The following defines the Xbox GameBar application. -->
+    <Application Id="Widget" Executable="XboxGameBarSpotify.exe" EntryPoint="XboxGameBarSpotify.App">
+      <uap:VisualElements DisplayName="Spotify Widget" Description="Spotify Xbox Game Bar Widget" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" BackgroundColor="transparent" AppListEntry="none">
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" />
+      </uap:VisualElements>
+      <Extensions>
+        <uap3:Extension Category="windows.appExtension">
+          <uap3:AppExtension Name="microsoft.gameBarUIExtension" Id="SpotifyWidget" DisplayName="Spotify" Description="Keep the tunes rolling. Enjoy Spotify while gaming." PublicFolder="GameBar">
+            <uap3:Properties>
+              <GameBarWidget Type="Standard">
+                <HomeMenuVisible>true</HomeMenuVisible>
+                <PinningSupported>true</PinningSupported>
+                <ActivateAfterInstall>true</ActivateAfterInstall>
+                <Window>
+                  <Size>
+                    <Height>488</Height>
+                    <Width>480</Width>
+                    <MinHeight>194</MinHeight>
+                    <MinWidth>320</MinWidth>
+                    <MaxWidth>486</MaxWidth>
+                  </Size>
+                  <ResizeSupported>
+                    <Horizontal>false</Horizontal>
+                    <Vertical>true</Vertical>
+                  </ResizeSupported>
+                </Window>
+              </GameBarWidget>
+            </uap3:Properties>
+          </uap3:AppExtension>
+        </uap3:Extension>
+      </Extensions>
+    </Application>
+  </Applications>
+  <mp:PhoneIdentity PhoneProductId="caac1b9d-621b-4f96-b143-e10e1397740a" PhonePublisherId="6a5aab88-e163-4308-a5f2-5ed7f9510a2d" />
+</Package>
